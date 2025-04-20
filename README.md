@@ -1,85 +1,135 @@
-I'll help you build out the UI and flow for your Zhuzh Shop Assistant browser extension. Let's create a visualization of how this would look and work for users.
+# Zhuzh Shop Assistant
 
-# Zhuzh Shop Assistant - Browser Extension UI & Flow
+A browser extension that transforms online shopping with real-time price comparisons, coupon finding, and AI-powered shopping assistance using Perplexity's Sonar API.
 
-## Extension Icon & Initial State
+---
 
-When installed, Zhuzh Shop Assistant will appear as a small, stylish icon in the browser toolbar. The icon would be subtle but recognizable - perhaps a shopping bag with a small "Z" emblem or a sparkle icon representing the "zhuzhing" up of shopping experiences.
+## Features
 
-Here's a mapped out complete user flow and interface elements:
-[![Zhuzh Shop Assistant User Flow](https://github.com/zhuzh-shop-ai/raw/main/docs/user-flow.png)]
+- **Automatic activation** on e-commerce sites (Amazon, eBay, Walmart, and more)
+- **Non-intrusive UI overlays** and collapsible side panel
+- **Real-time price comparisons** across major retailers
+- **Coupon finder** and (simulated) auto-apply at checkout
+- **AI shopping assistant chat** powered by Perplexity Sonar API
+- **User preferences** and secure API key storage
 
-## User Flow Walkthrough
+---
 
-Let's detail the complete user flow for Zhuzh Shop Assistant:
+## Tech Stack
 
-1. **Installation**
-   - User installs the Zhuzh Shop Assistant from the Chrome/Firefox Extension Store
-   - A brief onboarding overlay introduces key features and asks for initial preferences
-   - User grants necessary permissions for the extension to operate
+- Manifest V3 Chrome/Firefox extension
+- React + TailwindCSS for UI
+- Service worker for background tasks
+- Perplexity Sonar API integration
 
-2. **Activation & Detection**
-   - The extension quietly sits in the toolbar, with a subtle "Z" icon
-   - When user visits an e-commerce site, the icon animates/glows purple to indicate activation
-   - Background processes begin analyzing the page structure to identify product information
+---
 
-3. **Browsing Experience**
-   - As user browses product listings, subtle indicators appear near prices showing if better deals exist
-   - Small "Zhuzh" badges appear on products where significant savings are available elsewhere
-   - The side panel remains collapsed by default to minimize interference
+## Getting Started
 
-4. **Product Page Enhancement**
-   - When viewing a specific product, the extension automatically:
-     - Displays a top banner alert if a better price is found elsewhere
-     - Shows product overlay tooltips with additional information
-     - Activates the side panel with the price comparison tab open by default
+1. **Clone the repo**
+2. **Install dependencies** and build React assets (`sidepanel.js`, `sidepanel.css`)
+3. **Load as unpacked extension** in Chrome/Firefox
+4. **Set your Perplexity Sonar API key** in extension options
 
-5. **Interactive Side Panel**
-   - The side panel can be expanded/collapsed with a single click
-   - Three main tabs available:
-     - **Price Compare**: Shows same product across multiple retailers with pricing
-     - **Coupons**: Lists available coupon codes, sorted by potential savings
-     - **Chat**: Conversational assistant to answer product questions
+---
 
-6. **Checkout Optimization**
-   - When user reaches checkout page:
-     - Automatic coupon testing happens in the background
-     - A small overlay shows testing progress ("Testing coupons...")
-     - Best coupon is auto-applied with notification
-     - Alternative payment methods that might save money are suggested
+## Directory Structure
 
-7. **Post-Purchase**
-   - After purchase completion:
-     - Price protection monitoring begins automatically
-     - Delivery tracking information is extracted and monitored
-     - Return policy details are saved for easy reference
+```
+zhuzh-shop-ai/
+├── manifest.json
+├── background.js
+├── contentScript.js
+├── sidepanel.jsx
+├── sidepanel.html
+├── sidepanel.js      # built from sidepanel.jsx
+├── sidepanel.css
+├── popup.html
+├── options.html
+├── icons/
+├── assets/
+└── README.md
+```
+
+---
+
+## How It Works
+
+### Extension Icon & Initial State
+
+- Appears as a small, stylish icon in the browser toolbar (e.g., shopping bag with "Z" or sparkle).
+- Subtle but recognizable.
+
+### User Flow & UI Overview
+
+![Zhuzh Shop Assistant User Flow](https://github.com/zhuzh-shop-ai/raw/main/docs/user-flow.png)
+
+#### 1. Installation
+- Install from Chrome/Firefox Extension Store.
+- Onboarding overlay introduces features and asks for preferences.
+- User grants necessary permissions.
+
+#### 2. Activation & Detection
+- Extension sits quietly in the toolbar with a "Z" icon.
+- Icon animates/glows purple on e-commerce sites.
+- Background analyzes page structure for product info.
+
+#### 3. Browsing Experience
+- Subtle indicators near prices show if better deals exist.
+- "Zhuzh" badges highlight significant savings.
+- Side panel remains collapsed by default.
+
+#### 4. Product Page Enhancement
+- On product pages:
+  - Top banner alerts if better price found elsewhere.
+  - Overlay tooltips with extra info.
+  - Side panel auto-activates with price comparison tab.
+
+#### 5. Interactive Side Panel
+- Expand/collapse with one click.
+- Three tabs:
+  - **Price Compare**: Product prices across retailers.
+  - **Coupons**: Available coupon codes, sorted by savings.
+  - **Chat**: AI assistant for product questions.
+
+#### 6. Checkout Optimization
+- On checkout:
+  - Automatic coupon testing in background.
+  - Overlay shows progress ("Testing coupons...").
+  - Best coupon auto-applied with notification.
+  - Suggests alternative payment methods for savings.
+
+#### 7. Post-Purchase
+- After purchase:
+  - Price protection monitoring starts.
+  - Delivery tracking info extracted and monitored.
+  - Return policy details saved for reference.
+
+---
 
 ## Technical Implementation
 
-For building this browser extension, you'll need:
+- **Frontend**: React, TailwindCSS, HTML/CSS/JS (or TS)
+- **Extension Structure**:  
+  - `manifest.json` for config  
+  - Background script for state/API  
+  - Content scripts for DOM/page injection  
+  - Popup for user settings/preferences
+- **API Integration**:  
+  - Background worker for Sonar API  
+  - Service workers for auth/data caching  
+  - Streaming for chat
+- **Data Flow**:  
+  - DOM scraping → Structure product data → Sonar API  
+  - Sonar response → UI update  
+  - User actions → Preferences → Recommendations
+- **Security & Privacy**:  
+  - Local storage encryption  
+  - Minimal data collection  
+  - User controls for data usage
 
-1. **Frontend Stack**:
-   - HTML/CSS/JavaScript (or TypeScript)
-   - React for UI components (using React's Chrome Extension boilerplate)
-   - TailwindCSS for styling
+---
 
-2. **Extension Structure**:
-   - `manifest.json`: Extension configuration file
-   - Background script: For persistent state management and API calls
-   - Content scripts: For page injection and DOM manipulation
-   - Popup components: For user settings and preferences
+## License
 
-3. **Perplexity Sonar API Integration**:
-   - Background worker to handle API calls to Sonar
-   - Service workers to manage authentication and data caching
-   - Streaming response handling for chat functionality
-
-4. **Data Flow**:
-   - DOM scraping → Structure product data → Send to Sonar API
-   - Receive Sonar responses → Process data → Update UI elements
-   - User interactions → Update preferences → Adjust future recommendations
-
-5. **Security & Privacy**:
-   - Local storage encryption for saved preferences
-   - Minimized data collection (only what's needed for functionality)
-   - Clear user controls over data usage
+MIT

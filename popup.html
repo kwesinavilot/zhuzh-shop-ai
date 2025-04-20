@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zhuzh Shop Assistant Settings</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+  <style>
+    body { min-width: 300px; }
+  </style>
+</head>
+<body class="p-4">
+  <h2 class="font-bold text-lg mb-2">Zhuzh Shop Assistant</h2>
+  <label class="block mb-2">
+    <span class="text-sm">Perplexity Sonar API Key</span>
+    <input id="apiKeyInput" type="password" class="border rounded px-2 py-1 w-full mt-1" />
+  </label>
+  <button id="saveBtn" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 w-full">
+    Save API Key
+  </button>
+  <div id="status" class="mt-2 text-green-700 text-sm" style="display:none;">Saved!</div>
+  <script>
+    // Load and save API key using chrome.storage
+    document.addEventListener("DOMContentLoaded", () => {
+      chrome.storage.sync.get(['sonarApiKey'], (result) => {
+        if (result.sonarApiKey) {
+          document.getElementById('apiKeyInput').value = result.sonarApiKey;
+        }
+      });
+      document.getElementById('saveBtn').onclick = () => {
+        const key = document.getElementById('apiKeyInput').value;
+        chrome.storage.sync.set({ sonarApiKey: key }, () => {
+          document.getElementById('status').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('status').style.display = 'none';
+          }, 1500);
+        });
+      };
+    });
+  </script>
+</body>
+</html>

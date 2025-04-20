@@ -1,0 +1,4 @@
+/* If using Tailwind via CDN for dev: */
+@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css");
+
+/* You can add custom styles below if needed */
