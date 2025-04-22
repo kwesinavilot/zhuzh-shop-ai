@@ -28,7 +28,7 @@ A browser extension that transforms online shopping with real-time price compari
 
 1. **Clone the repo**
 2. **Install dependencies** and build React assets (`sidepanel.js`, `sidepanel.css`)
-3. **Load as unpacked extension** in Chrome/Firefox
+3. **Load as unpacked extension** in Chrome/Firefox from the `zhuzh-shop-ai/zhuzh-shop-ai` directory
 4. **Set your Perplexity Sonar API key** in extension options
 
 ---
@@ -37,18 +37,21 @@ A browser extension that transforms online shopping with real-time price compari
 
 ```
 zhuzh-shop-ai/
-├── manifest.json
-├── background.js
-├── contentScript.js
-├── sidepanel.jsx
-├── sidepanel.html
-├── sidepanel.js      # built from sidepanel.jsx
-├── sidepanel.css
-├── popup.html
-├── options.html
-├── icons/
-├── assets/
-└── README.md
+└── zhuzh-shop-ai/
+    ├── manifest.json
+    ├── background.js
+    ├── contentScript.js
+    ├── sidepanel.jsx
+    ├── sidepanel.html
+    ├── sidepanel.js      # built from sidepanel.jsx by Vite
+    ├── sidepanel.css
+    ├── popup.html
+    ├── options.html
+    ├── icons/
+    ├── assets/
+    ├── src/              # Vite React source code
+    ├── dist/             # Vite build output
+    └── README.md
 ```
 
 ---

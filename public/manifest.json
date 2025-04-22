@@ -32,8 +32,8 @@
         "*://*.walmart.com/*",
         "*://*/*"
       ],
-      "js": ["contentScript.js"],
-      "css": ["contentStyles.css"],
+      "js": ["content.js"],
+      "css": ["content.css"],
       "run_at": "document_idle"
     }
   ],
